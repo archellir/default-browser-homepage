@@ -8,31 +8,28 @@
 	import { isDarkText } from '$lib/stores/theme';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
+	import { updateBackground, type ImageInfo } from '$lib/services/background';
 
 	let time = $state(new Date());
 	let backgroundUrl = $state('');
 	let isLoading = $state(true);
+	let imageInfo = $state<ImageInfo | null>(null);
 
-	async function updateBackground() {
+	async function refreshBackground() {
 		isLoading = true;
-		const newUrl = `https://picsum.photos/3024/1964?random=${Date.now()}`;
-
-		// Create a promise that resolves when the image loads
-		await new Promise((resolve, reject) => {
-			const img = new Image();
-			img.onload = resolve;
-			img.onerror = reject;
-			img.src = newUrl;
-		});
-
-		backgroundUrl = newUrl;
-		isLoading = false;
+		try {
+			const { finalUrl, imageInfo: newImageInfo } = await updateBackground();
+			backgroundUrl = finalUrl;
+			imageInfo = newImageInfo;
+		} finally {
+			isLoading = false;
+		}
 	}
 
 	onMount(() => {
-		updateBackground();
+		refreshBackground();
 		const timeInterval = setInterval(() => (time = new Date()), 1000);
-		const bgInterval = setInterval(updateBackground, 300000);
+		const bgInterval = setInterval(refreshBackground, 300000);
 		return () => {
 			clearInterval(timeInterval);
 			clearInterval(bgInterval);
@@ -70,5 +67,31 @@
 		<LinkSection title={SectionType.CLOUD} links={cloudLinks} />
 	</div>
 
-	<ThemeToggle />
+	<div class="fixed bottom-8 right-8 flex items-center gap-4">
+		{#if imageInfo}
+			<a
+				href={imageInfo.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="rounded-full bg-white/20 p-3 backdrop-blur-md transition-all hover:bg-white/30"
+				title="Photo by {imageInfo.author}"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+					<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+				</svg>
+			</a>
+		{/if}
+		<ThemeToggle />
+	</div>
 </main>

@@ -4,7 +4,7 @@
 
 <button
 	on:click={() => ($isDarkText = !$isDarkText)}
-	class="fixed bottom-8 right-8 rounded-full bg-white/20 p-3 backdrop-blur-md transition-all hover:bg-white/30"
+	class="rounded-full bg-white/20 p-3 backdrop-blur-md transition-all hover:bg-white/30"
 >
 	{#if $isDarkText}
 		<svg
