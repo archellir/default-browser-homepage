@@ -4,18 +4,15 @@
 	import WeatherWidget from '$lib/components/WeatherWidget.svelte';
 	import LinkSection from '$lib/components/LinkSection.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
-	import { getImageBrightness } from '$lib/utils/image';
-	import { ImageBrightness, LinkSection as SectionType } from '$lib/types/common';
+	import { LinkSection as SectionType } from '$lib/types/common';
 	import { isDarkText } from '$lib/stores/theme';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
 	let time = $state(new Date());
 	let backgroundUrl = $state(`https://picsum.photos/3024/1964?random=${Date.now()}`);
-	let imageBrightness = $state<ImageBrightness>(ImageBrightness.DARK);
 
-	async function updateBackground() {
+	function updateBackground() {
 		backgroundUrl = `https://picsum.photos/3024/1964?random=${Date.now()}`;
-		imageBrightness = await getImageBrightness(backgroundUrl);
 	}
 
 	onMount(() => {
@@ -47,13 +44,13 @@
 	</div>
 
 	<div class="grid grid-cols-2 gap-24">
-		<LinkSection title={SectionType.PERSONAL} links={personalLinks} brightness={imageBrightness} />
-		<LinkSection title={SectionType.TOOLS} links={toolLinks} brightness={imageBrightness} />
+		<LinkSection title={SectionType.PERSONAL} links={personalLinks} />
+		<LinkSection title={SectionType.TOOLS} links={toolLinks} />
 	</div>
 
 	<div class="grid grid-cols-2 gap-24 self-end">
-		<LinkSection title={SectionType.BUSINESS} links={businessLinks} brightness={imageBrightness} />
-		<LinkSection title={SectionType.CLOUD} links={cloudLinks} brightness={imageBrightness} />
+		<LinkSection title={SectionType.BUSINESS} links={businessLinks} />
+		<LinkSection title={SectionType.CLOUD} links={cloudLinks} />
 	</div>
 
 	<ThemeToggle />

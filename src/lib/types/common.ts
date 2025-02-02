@@ -4,11 +4,6 @@ export interface Link {
   description?: string;
 }
 
-export enum ImageBrightness {
-  DARK = 'dark',
-  LIGHT = 'light'
-}
-
 export enum LinkSection {
   PERSONAL = 'Personal',
   TOOLS = 'Tools',
