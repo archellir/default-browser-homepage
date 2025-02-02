@@ -6,6 +6,8 @@
 	import SearchBar from '$lib/components/SearchBar.svelte';
 	import { getImageBrightness } from '$lib/utils/image';
 	import { ImageBrightness, LinkSection as SectionType } from '$lib/types/common';
+	import { isDarkText } from '$lib/stores/theme';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
 	let time = $state(new Date());
 	let backgroundUrl = $state(`https://picsum.photos/3024/1964?random=${Date.now()}`);
@@ -28,7 +30,9 @@
 </script>
 
 <main
-	class="relative grid h-screen grid-rows-[auto_auto_1fr] gap-16 p-16 font-['IBM_Plex_Mono'] text-white"
+	class="relative grid h-screen grid-rows-[auto_auto_1fr] gap-16 p-16 font-['IBM_Plex_Mono']"
+	class:text-white={$isDarkText}
+	class:text-black={!$isDarkText}
 	style:background-image="url({backgroundUrl})"
 	style:background-size="cover"
 	style:background-position="center"
@@ -51,4 +55,6 @@
 		<LinkSection title={SectionType.BUSINESS} links={businessLinks} brightness={imageBrightness} />
 		<LinkSection title={SectionType.CLOUD} links={cloudLinks} brightness={imageBrightness} />
 	</div>
+
+	<ThemeToggle />
 </main>
