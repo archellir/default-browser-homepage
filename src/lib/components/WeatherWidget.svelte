@@ -37,24 +37,24 @@
 	});
 </script>
 
-<div class="absolute right-8 top-8 rounded-lg bg-white/20 px-6 py-4 backdrop-blur-md">
+<div class="absolute right-8 top-8 rounded-lg bg-black/30 px-6 py-4 backdrop-blur-md">
 	{#if loading}
 		<span class="text-xl">Loading...</span>
 	{:else if error}
 		<span class="text-xl">{error}</span>
 	{:else}
 		<div class="flex flex-col items-end gap-2">
-			<div class="text-4xl font-medium">{temperature}°C</div>
-			<div class="text-base opacity-90">{getWeatherDescription(weatherCode!)}</div>
-			<div class="text-base opacity-90">Humidity: {humidity}%</div>
-			<div class="text-base opacity-90">Wind: {windSpeed} km/h</div>
-			<div class="mt-3 border-t border-white/30 pt-3">
-				{#if recommendations}
+			<div class="text-3xl font-medium">{temperature}°C</div>
+			<div class="text-xs opacity-70">{getWeatherDescription(weatherCode!)}</div>
+			<div class="text-xs opacity-70">Humidity: {humidity}%</div>
+			<div class="text-xs opacity-70">Wind: {windSpeed} km/h</div>
+			{#if recommendations}
+				<div class="mt-4 space-y-3 border-t border-white/30 pt-4">
 					{#each recommendations as { message }}
-						<div class="text-base opacity-90">{message}</div>
+						<div class="text-base">{message}</div>
 					{/each}
-				{/if}
-			</div>
+				</div>
+			{/if}
 		</div>
 	{/if}
 </div>
