@@ -22,6 +22,11 @@ export const personalLinks: Link[] = [
     name: 'Analytics',
     url: 'https://analytics.arcbjorn.com',
     description: 'Personal projects analytics'
+  },
+  {
+    name: 'Personal Projects (Claude)',
+    url: 'https://claude.ai/project/56eb0512-6724-4d18-b85f-5f5d9747c164',
+    description: 'Personal project chats with Claude'
   }
 ];
 
