@@ -44,21 +44,12 @@
 </script>
 
 <div
-	class="fixed inset-0 z-50 flex items-center justify-center transition-all duration-500"
+	class="fixed inset-0 z-50 transition-all duration-500"
 	class:opacity-0={!visible}
 	class:opacity-100={visible}
 	class:pointer-events-none={!visible}
 >
 	<canvas bind:this={canvas} class="absolute inset-0 h-full w-full" />
-
-	<div class="relative flex flex-col items-center gap-4">
-		<div class="relative h-24 w-24">
-			<div class="absolute inset-0 animate-ping rounded-full bg-white/30" />
-			<div
-				class="absolute inset-2 animate-spin rounded-full border-4 border-white border-t-transparent"
-			/>
-		</div>
-	</div>
 </div>
 
 <style>
