@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" fill="white" rx="64"/>
+  
+  <!-- Japanese House design -->
+  <path
+    d="
+      M 256 80
+      L 80 200
+      L 432 200
+      Z
+      M 120 200
+      L 120 412
+      L 392 412
+      L 392 200
+    "
+    fill="black"
+    stroke="black"
+    stroke-width="16"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  
+  <!-- Curved Roof Edges -->
+  <path
+    d="
+      M 80 200
+      Q 256 160 432 200
+    "
+    fill="none"
+    stroke="black"
+    stroke-width="24"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  
+  <!-- Sliding doors (Shoji) -->
+  <path
+    d="
+      M 160 280
+      L 160 412
+      M 256 280
+      L 256 412
+      M 352 280
+      L 352 412
+    "
+    stroke="white"
+    stroke-width="16"
+    stroke-linecap="round"
+  />
+  
+  <!-- Horizontal door frames -->
+  <path
+    d="
+      M 120 280
+      L 392 280
+      M 120 346
+      L 392 346
+    "
+    stroke="white"
+    stroke-width="16"
+    stroke-linecap="round"
+  />
+</svg> 

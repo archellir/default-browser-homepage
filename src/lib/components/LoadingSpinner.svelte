@@ -6,6 +6,9 @@
 	let columns: number[] = [];
 	let fontSize = 14;
 
+	// Katakana characters for the matrix effect
+	const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
+
 	$effect(() => {
 		if (visible && canvas) {
 			const ctx = canvas.getContext('2d')!;
@@ -23,7 +26,8 @@
 				ctx.font = `${fontSize}px monospace`;
 
 				for (let i = 0; i < columns.length; i++) {
-					const char = String.fromCharCode(Math.random() * 128);
+					// Get random katakana character
+					const char = katakana[Math.floor(Math.random() * katakana.length)];
 					const x = i * fontSize;
 					const y = columns[i] * fontSize;
 
