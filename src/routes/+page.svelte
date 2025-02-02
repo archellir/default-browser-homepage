@@ -7,12 +7,26 @@
 	import { LinkSection as SectionType } from '$lib/types/common';
 	import { isDarkText } from '$lib/stores/theme';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 
 	let time = $state(new Date());
-	let backgroundUrl = $state(`https://picsum.photos/3024/1964?random=${Date.now()}`);
+	let backgroundUrl = $state('');
+	let isLoading = $state(true);
 
-	function updateBackground() {
-		backgroundUrl = `https://picsum.photos/3024/1964?random=${Date.now()}`;
+	async function updateBackground() {
+		isLoading = true;
+		const newUrl = `https://picsum.photos/3024/1964?random=${Date.now()}`;
+
+		// Create a promise that resolves when the image loads
+		await new Promise((resolve, reject) => {
+			const img = new Image();
+			img.onload = resolve;
+			img.onerror = reject;
+			img.src = newUrl;
+		});
+
+		backgroundUrl = newUrl;
+		isLoading = false;
 	}
 
 	onMount(() => {
@@ -26,11 +40,14 @@
 	});
 </script>
 
+<LoadingSpinner visible={isLoading} />
 <main
-	class="relative grid h-screen grid-rows-[auto_auto_1fr] gap-16 p-16 font-['IBM_Plex_Mono']"
+	class="relative grid h-screen grid-rows-[auto_auto_1fr] gap-16 p-16 font-['IBM_Plex_Mono'] transition-opacity duration-500"
+	class:opacity-0={isLoading}
+	class:opacity-100={!isLoading}
 	class:text-white={$isDarkText}
 	class:text-black={!$isDarkText}
-	style:background-image="url({backgroundUrl})"
+	style:background-image={backgroundUrl ? `url(${backgroundUrl})` : 'none'}
 	style:background-size="cover"
 	style:background-position="center"
 >
