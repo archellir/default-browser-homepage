@@ -9,6 +9,7 @@
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import { updateBackground, type ImageInfo } from '$lib/services/background';
+	import TimeWidget from '$lib/components/TimeWidget.svelte';
 
 	let time = $state(new Date());
 	let backgroundUrl = $state('');
@@ -48,6 +49,7 @@
 	style:background-size="cover"
 	style:background-position="center"
 >
+	<TimeWidget />
 	<WeatherWidget />
 
 	<div class="flex flex-col items-center justify-start">
@@ -75,6 +77,7 @@
 				rel="noopener noreferrer"
 				class="rounded-full bg-white/20 p-3 backdrop-blur-md transition-all hover:bg-white/30"
 				title="Photo by {imageInfo.author}"
+				aria-label="View photo source"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -94,4 +97,8 @@
 		{/if}
 		<ThemeToggle />
 	</div>
+
+	<button type="button" aria-label="Refresh background" onclick={refreshBackground}>
+		<!-- button content -->
+	</button>
 </main>
