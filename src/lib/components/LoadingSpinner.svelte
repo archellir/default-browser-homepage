@@ -53,23 +53,5 @@
 	class:opacity-100={visible}
 	class:pointer-events-none={!visible}
 >
-	<canvas bind:this={canvas} class="absolute inset-0 h-full w-full" />
+	<canvas bind:this={canvas} class="absolute inset-0 z-50" aria-label="Loading animation"></canvas>
 </div>
-
-<style>
-	@keyframes gradient {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-
-	.animate-gradient {
-		animation: gradient 8s ease infinite;
-	}
-</style>
