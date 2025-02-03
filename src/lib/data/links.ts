@@ -112,5 +112,4 @@ export const learningLinks: Link[] = [
   { name: '🧩 LeetCode', url: 'https://leetcode.com', description: 'Coding practice' },
   { name: '🎯 Exercism', url: 'https://exercism.io', description: 'Coding exercises & practice' },
   { name: '⚔️ Codewars', url: 'https://codewars.com', description: 'Coding challenges & practice' },
-  { name: '🔰 CodingBat', url: 'https://codingbat.com', description: 'Coding exercises & practice' }
 ]; 
