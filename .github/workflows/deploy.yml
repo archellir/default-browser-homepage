@@ -27,22 +27,16 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_DEPLOY_KEY }}
-          name: id_rsa
-          known_hosts: unnecessary
-          if_key_exists: replace
-          config: |
-            Host *
-              StrictHostKeyChecking no
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_DEPLOY_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy with rsync
         run: |
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_rsa
           rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
+            -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
             ./build/ \
             ${{ secrets.SSH_DEPLOY_USER }}@${{ secrets.SSH_DEPLOY_HOST }}:/root/static/homepage.arcbjorn.com/ 
