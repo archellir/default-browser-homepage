@@ -49,10 +49,14 @@
 			<div class="text-xs opacity-70">Humidity: {humidity}%</div>
 			<div class="text-xs opacity-70">Wind: {windSpeed} km/h</div>
 			{#if recommendations}
-				<div class="mt-4 space-y-3 border-t border-white/30 pt-4">
-					{#each recommendations as { message }}
-						<div class="text-base">{message}</div>
-					{/each}
+				<div class="mt-4 border-t border-white/30 pt-4">
+					<div class="grid grid-cols-2 gap-3">
+						{#each recommendations as { message }}
+							<div class="flex items-center justify-center rounded bg-white/10 p-2 text-sm">
+								{message}
+							</div>
+						{/each}
+					</div>
 				</div>
 			{/if}
 		</div>
