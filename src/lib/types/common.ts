@@ -8,5 +8,6 @@ export enum LinkSection {
   PERSONAL = 'Personal',
   TOOLS = 'Tools',
   BUSINESS = 'Business',
-  CLOUD = 'Cloud Providers'
+  CLOUD = 'Cloud Providers',
+  FUN = 'Fun'
 } 

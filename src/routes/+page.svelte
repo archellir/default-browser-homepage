@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { personalLinks, toolLinks, businessLinks, cloudLinks } from '$lib/data/links';
+	import { personalLinks, toolLinks, businessLinks, cloudLinks, funLinks } from '$lib/data/links';
 	import WeatherWidget from '$lib/components/WeatherWidget.svelte';
 	import LinkSection from '$lib/components/LinkSection.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
@@ -65,6 +65,8 @@
 	</div>
 
 	<div class="grid grid-cols-2 gap-24 self-end">
+		<div></div>
+		<LinkSection title={SectionType.FUN} links={funLinks} />
 		<LinkSection title={SectionType.BUSINESS} links={businessLinks} />
 		<LinkSection title={SectionType.CLOUD} links={cloudLinks} />
 	</div>

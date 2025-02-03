@@ -83,4 +83,27 @@ export const cloudLinks: Link[] = [
     url: 'https://dash.cloudflare.com',
     description: 'DNS & CDN provider'
   }
+];
+
+export const funLinks: Link[] = [
+  {
+    name: '📺 YouTube',
+    url: 'https://youtube.com',
+    description: 'Video streaming platform'
+  },
+  {
+    name: '🎬 Netflix',
+    url: 'https://netflix.com',
+    description: 'Movies and TV shows'
+  },
+  {
+    name: '🎮 Twitch',
+    url: 'https://twitch.tv',
+    description: 'Live streaming platform'
+  },
+  {
+    name: '✨ Disney+',
+    url: 'https://disneyplus.com',
+    description: 'Disney streaming service'
+  }
 ]; 
