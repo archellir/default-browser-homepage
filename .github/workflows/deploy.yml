@@ -35,6 +35,6 @@ jobs:
           SSHPASS: ${{ secrets.SSH_DEPLOY_PASSWORD }}
         run: |
           sshpass -e rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
+            -e "sshpass -e ssh -o StrictHostKeyChecking=no -o PubkeyAuthentication=no -o PasswordAuthentication=yes" \
             ./build/ \
             ${{ secrets.SSH_DEPLOY_USER }}@${{ secrets.SSH_DEPLOY_HOST }}:/root/static/homepage.arcbjorn.com/ 
