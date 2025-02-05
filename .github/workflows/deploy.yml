@@ -27,14 +27,18 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
+      - name: Add known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SSH_DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_DEPLOY_KEY }}
 
       - name: Deploy with rsync
-        env:
-          SSHPASS: ${{ secrets.SSH_DEPLOY_PASSWORD }}
         run: |
-          sshpass -e rsync -avz --delete \
-            -e "sshpass -e ssh -o StrictHostKeyChecking=no -o PubkeyAuthentication=no -o PasswordAuthentication=yes" \
+          rsync -avz --delete \
             ./build/ \
             ${{ secrets.SSH_DEPLOY_USER }}@${{ secrets.SSH_DEPLOY_HOST }}:/root/static/homepage.arcbjorn.com/ 
