@@ -20,7 +20,7 @@
 				<span class="relative">{link.name}</span>
 				{#if link.description}
 					<span
-						class="pointer-events-none absolute left-1/2 top-[115%] hidden w-max -translate-x-1/2 rounded bg-black/90 px-3 py-1.5 text-sm group-hover:block"
+						class="pointer-events-none absolute left-1/2 top-[115%] hidden w-max -translate-x-1/2 rounded bg-black/90 px-3 py-1.5 text-sm text-white group-hover:block"
 						style="transform: translate(-50%, 0) scale(1);"
 					>
 						{link.description}
