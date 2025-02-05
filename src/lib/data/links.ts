@@ -109,7 +109,15 @@ export const funLinks: Link[] = [
 ];
 
 export const learningLinks: Link[] = [
-  { name: '🧩 LeetCode', url: 'https://leetcode.com', description: 'Coding practice' },
-  { name: '🎯 Exercism', url: 'https://exercism.io', description: 'Coding exercises & practice' },
-  { name: '⚔️ Codewars', url: 'https://codewars.com', description: 'Coding challenges & practice' },
+	{ name: '🧩 LeetCode', url: 'https://leetcode.com/problemset/', description: 'Coding practice' },
+	{
+		name: '🎯 Exercism',
+		url: 'https://exercism.org/tracks',
+		description: 'Coding exercises & practice'
+	},
+	{
+		name: '⚔️ Codewars',
+		url: 'https://www.codewars.com/kata/latest/my-languages?beta=false',
+		description: 'Coding challenges & practice'
+	}
 ]; 
