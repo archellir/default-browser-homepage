@@ -17,7 +17,6 @@
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import { updateBackground, type ImageInfo } from '$lib/services/background';
 	import TimeWidget from '$lib/components/TimeWidget.svelte';
-	import QuoteWidget from '$lib/components/QuoteWidget.svelte';
 
 	let time = $state(new Date());
 	let backgroundUrl = $state('');
@@ -110,5 +109,3 @@
 		<!-- button content -->
 	</button>
 </main>
-
-<QuoteWidget />
