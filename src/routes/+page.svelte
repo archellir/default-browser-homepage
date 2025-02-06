@@ -17,6 +17,7 @@
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import { updateBackground, type ImageInfo } from '$lib/services/background';
 	import TimeWidget from '$lib/components/TimeWidget.svelte';
+	import QuoteWidget from '$lib/components/QuoteWidget.svelte';
 
 	let time = $state(new Date());
 	let backgroundUrl = $state('');
@@ -47,9 +48,7 @@
 
 <LoadingSpinner visible={isLoading} />
 <main
-	class="relative grid h-screen grid-rows-[auto_auto_1fr] gap-16 p-16 font-['IBM_Plex_Mono'] transition-opacity duration-500"
-	class:opacity-0={isLoading}
-	class:opacity-100={!isLoading}
+	class="relative grid h-screen grid-rows-[auto_auto_1fr] gap-16 p-16 font-['IBM_Plex_Mono'] transition-all duration-500"
 	class:text-white={$isDarkText}
 	class:text-black={!$isDarkText}
 	style:background-image={backgroundUrl ? `url(${backgroundUrl})` : 'none'}
@@ -111,3 +110,5 @@
 		<!-- button content -->
 	</button>
 </main>
+
+<QuoteWidget />

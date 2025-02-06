@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { protect } from '$lib/utils/protection';
+	import { fade } from 'svelte/transition';
 
 	let { children } = $props();
 
@@ -9,6 +10,7 @@
 	const token_name = 'auth_token';
 
 	let isAuthenticated = $state(false);
+	let isLoading = $state(true);
 	let password = $state('');
 
 	function handleKeyPress(e: KeyboardEvent) {
@@ -21,9 +23,29 @@
 		if (
 			(e.ctrlKey && e.shiftKey && e.key === 'I') ||
 			(e.ctrlKey && e.shiftKey && e.key === 'J') ||
+			((e.ctrlKey || e.metaKey) && e.key === 'F') ||
 			e.key === 'F12'
 		) {
 			e.preventDefault();
+		}
+	}
+
+	function toggleFullscreen(e: KeyboardEvent) {
+		// Ignore if we're in an input element
+		if (document.activeElement?.tagName === 'INPUT') return;
+
+		// Handle F key for fullscreen toggle
+		if (e.key.toLowerCase() === 'f') {
+			if (!e.ctrlKey && !e.altKey && !e.metaKey) {
+				e.preventDefault();
+				if (!document.fullscreenElement) {
+					document.documentElement.requestFullscreen();
+				} else {
+					document.exitFullscreen();
+				}
+			} else if (document.fullscreenElement && (e.ctrlKey || e.metaKey)) {
+				e.preventDefault();
+			}
 		}
 	}
 
@@ -39,30 +61,41 @@
 		}
 	}
 
-	function checkStoredAuth() {
+	function checkStoredAuth(): boolean {
 		const token = localStorage.getItem(token_name);
-		if (token && protect.verifyToken(token, variable)) {
-			isAuthenticated = true;
-		}
+		return !!(token && protect.verifyToken(token, variable));
 	}
 
-	onMount(() => {
-		checkStoredAuth();
+	// Initialize auth state before mount
+	$effect(() => {
+		isAuthenticated = checkStoredAuth();
+		isLoading = false;
+	});
 
+	onMount(() => {
 		// Prevent dev tools
 		window.addEventListener('contextmenu', (e) => e.preventDefault());
 		window.addEventListener('keydown', preventDevTools);
+		window.addEventListener('keydown', toggleFullscreen);
 
 		return () => {
 			window.removeEventListener('keydown', preventDevTools);
+			window.removeEventListener('keydown', toggleFullscreen);
 		};
 	});
 </script>
 
-{#if isAuthenticated}
-	{@render children()}
+{#if isLoading}
+	<div class="h-screen bg-[#1d2021]" />
+{:else if isAuthenticated}
+	<div transition:fade={{ duration: 300 }}>
+		{@render children()}
+	</div>
 {:else}
-	<div class="relative flex h-screen items-center justify-center overflow-hidden bg-[#1d2021]">
+	<div
+		transition:fade={{ duration: 300 }}
+		class="relative flex h-screen items-center justify-center overflow-hidden bg-[#1d2021]"
+	>
 		<!-- Gruvbox-themed background effects -->
 		<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#32302f,#1d2021)]"></div>
 		<div class="absolute h-56 w-56 -translate-x-1/2 rounded-full bg-[#d65d0e]/20 blur-3xl"></div>

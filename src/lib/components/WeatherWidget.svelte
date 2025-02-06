@@ -11,10 +11,26 @@
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 	let recommendations = $state<ActivityRecommendation[] | null>(null);
+	let loadingProgress = $state(0);
 
 	async function updateWeather() {
 		try {
+			// Reset states
+			loading = true;
+			loadingProgress = 0;
+
+			// Simulate loading progress
+			const progressInterval = setInterval(() => {
+				loadingProgress = Math.min(loadingProgress + Math.random() * 30, 90);
+			}, 200);
+
 			const data = await fetchWeatherData();
+			clearInterval(progressInterval);
+			loadingProgress = 100;
+
+			// Short delay to show 100% completion
+			await new Promise((resolve) => setTimeout(resolve, 200));
+
 			temperature = data.temperature;
 			humidity = data.humidity;
 			windSpeed = data.windSpeed;
@@ -39,7 +55,15 @@
 
 <div class="absolute right-8 top-8 rounded-lg bg-black/30 px-6 py-4 backdrop-blur-md">
 	{#if loading}
-		<span class="text-xl">Loading...</span>
+		<div class="flex w-48 flex-col gap-3">
+			<div class="h-8 w-full overflow-hidden rounded-lg bg-white/10">
+				<div
+					class="h-full bg-white/20 transition-all duration-300"
+					style:width="{loadingProgress}%"
+				/>
+			</div>
+			<div class="text-xs opacity-70">Loading weather data...</div>
+		</div>
 	{:else if error}
 		<span class="text-xl">{error}</span>
 	{:else}
