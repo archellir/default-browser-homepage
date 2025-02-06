@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { isDarkText } from '$lib/stores/theme';
+	import { fallbackQuotes } from '$lib/data/quotes';
 
 	interface Quote {
 		text: string;
@@ -10,53 +11,26 @@
 
 	let quote = $state<Quote | null>(null);
 
-	function fetchQuoteJSONP() {
-		return new Promise<Quote>((resolve, reject) => {
-			const script = document.createElement('script');
-			const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-
-			// @ts-ignore
-			window[callbackName] = (data: any) => {
-				// @ts-ignore
-				delete window[callbackName];
-				document.body.removeChild(script);
-				resolve({
-					text: data.quoteText.trim(),
-					author: data.quoteAuthor || 'Unknown'
-				});
-			};
-
-			script.src = `http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=${callbackName}`;
-			script.onerror = reject;
-			document.body.appendChild(script);
-		});
-	}
-
-	async function updateQuote() {
+	async function fetchQuote() {
 		try {
-			quote = await fetchQuoteJSONP();
+			const response = await fetch(
+				'https://quoteslate.vercel.app/api/quotes/random?tags=wisdom&minLength=30&maxLength=150'
+			);
+			const [data] = await response.json();
+
+			quote = {
+				text: data.quote,
+				author: data.author
+			};
 		} catch (error) {
 			console.error('Failed to fetch quote:', error);
-			const fallbackQuotes = [
-				{ text: 'The best way to predict the future is to invent it.', author: 'Alan Kay' },
-				{ text: 'Simplicity is prerequisite for reliability.', author: 'Edsger W. Dijkstra' },
-				{
-					text: 'The computer was born to solve problems that did not exist before.',
-					author: 'Bill Gates'
-				},
-				{ text: 'Talk is cheap. Show me the code.', author: 'Linus Torvalds' },
-				{
-					text: 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-					author: 'Martin Fowler'
-				}
-			];
 			quote = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
 		}
 	}
 
 	onMount(() => {
-		updateQuote();
-		const interval = setInterval(updateQuote, 300000);
+		fetchQuote();
+		const interval = setInterval(fetchQuote, 300000); // 5 minutes
 		return () => clearInterval(interval);
 	});
 </script>
@@ -68,6 +42,6 @@
 		class:text-white={$isDarkText}
 		class:text-black={!$isDarkText}
 	>
-		<p class="whitespace-nowrap text-sm">{quote.text} — {quote.author}</p>
+		<p class="whitespace-nowrap text-sm 2xl:text-base">{quote.text} — {quote.author}</p>
 	</div>
 {/if}
