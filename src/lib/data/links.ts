@@ -92,6 +92,16 @@ export const funLinks: Link[] = [
     description: 'Video streaming platform'
   },
   {
+    name: '🎥 Arc Moto World',
+    url: 'https://youtube.com/@arcmotoworld',
+    description: 'My motorcycle channel'
+  },
+  {
+    name: '📸 Arc Moto Garage',
+    url: 'https://www.instagram.com/arc.motos.garage',
+    description: 'My motorcycle garage'
+  },
+  {
     name: '🎬 Netflix',
     url: 'https://netflix.com',
     description: 'Movies and TV shows'
