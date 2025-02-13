@@ -97,6 +97,11 @@ export const funLinks: Link[] = [
     description: 'My motorcycle channel'
   },
   {
+    name: '📰 Hacker News',
+    url: 'https://news.ycombinator.com',
+    description: 'Tech news and discussions'
+  },
+  {
     name: '📸 Arc Moto Garage',
     url: 'https://www.instagram.com/arc.motos.garage',
     description: 'My motorcycle garage'
