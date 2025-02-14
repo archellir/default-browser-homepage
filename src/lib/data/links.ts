@@ -82,6 +82,11 @@ export const cloudLinks: Link[] = [
     name: '⚡ Cloudflare',
     url: 'https://dash.cloudflare.com',
     description: 'DNS & CDN provider'
+  },
+  {
+    name: '🦕 Deno Deploy',
+    url: 'https://dash.deno.com',
+    description: 'Edge runtime platform'
   }
 ];
 
