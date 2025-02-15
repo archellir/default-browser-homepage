@@ -87,6 +87,11 @@ export const cloudLinks: Link[] = [
     name: '🦕 Deno Deploy',
     url: 'https://dash.deno.com',
     description: 'Edge runtime platform'
+  },
+  {
+    name: '🚀 Vercel',
+    url: 'https://vercel.com/olegs-projects-bed7d8a2',
+    description: 'Cloud deployments platform'
   }
 ];
 
