@@ -40,26 +40,57 @@ export const toolLinks: Link[] = [
     name: '🧠 Claude',
     url: 'https://claude.ai/',
     description: 'General AI assistant'
+  },
+  {
+    name: '✉️ Gmail',
+    url: 'https://mail.google.com/',
+    description: 'Google email service'
+  },
+  {
+    name: '🔒 Proton Mail',
+    url: 'https://proton.me/mail',
+    description: 'Secure email service'
   }
 ];
 
 export const businessLinks: Link[] = [
-  { name: '🏢 Company', url: 'https://arkydev.com/', description: 'Company website' },
-  {
-    name: '💰 Tax Calculator',
-    url: 'https://tax.arcbjorn.com/',
-    description: 'Income tax calculator'
-  },
-  {
-    name: '📊 Tax Service',
-    url: 'https://eservices.rs.ge/',
-    description: 'Revenue Service'
-  },
-  {
-    name: '💼 Work (Claude)',
-    url: 'https://claude.ai/project/38dfce20-5e45-43cd-b64f-3272d4f2a623',
-    description: 'Work-related project chats with Claude'
-  }
+	{ name: '🏢 Company', url: 'https://arkydev.com/', description: 'Company website' },
+	{
+		name: '💰 Tax Calculator',
+		url: 'https://tax.arcbjorn.com/',
+		description: 'Income tax calculator'
+	},
+	{
+		name: '📊 Tax Service',
+		url: 'https://eservices.rs.ge/',
+		description: 'Revenue Service'
+	},
+	{
+		name: '💼 Work (Claude)',
+		url: 'https://claude.ai/project/38dfce20-5e45-43cd-b64f-3272d4f2a623',
+		description: 'Work-related project chats with Claude'
+	},
+
+	{
+		name: '💹 Bybit',
+		url: 'https://www.bybit.com/en/signin',
+		description: 'Crypto exchange'
+	},
+	{
+		name: '💎 Gemini',
+		url: 'https://exchange.gemini.com',
+		description: 'Crypto exchange'
+	},
+	{
+		name: '🐙 Kraken',
+		url: 'https://www.kraken.com/c',
+		description: 'Crypto exchange'
+	},
+	{
+		name: '🏦 BOG',
+		url: 'https://ibank.bog.ge/',
+		description: 'Banking services'
+	}
 ];
 
 export const cloudLinks: Link[] = [
