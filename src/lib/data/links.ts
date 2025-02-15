@@ -42,6 +42,11 @@ export const toolLinks: Link[] = [
     description: 'General AI assistant'
   },
   {
+    name: '🌟 Gemini',
+    url: 'https://gemini.google.com/app',
+    description: 'Google AI assistant'
+  },
+  {
     name: '✉️ Gmail',
     url: 'https://mail.google.com/',
     description: 'Google email service'
