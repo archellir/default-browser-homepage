@@ -55,6 +55,11 @@ export const toolLinks: Link[] = [
     name: '🔒 Proton Mail',
     url: 'https://proton.me/mail',
     description: 'Secure email service'
+  },
+  {
+    name: '🤗 Hugging Face',
+    url: 'https://huggingface.co/',
+    description: 'Machine learning community and AI tools'
   }
 ];
 
