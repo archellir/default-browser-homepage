@@ -185,5 +185,15 @@ export const learningLinks: Link[] = [
 		name: '⚔️ Codewars',
 		url: 'https://www.codewars.com/kata/latest/my-languages?beta=false',
 		description: 'Coding challenges & practice'
+	},
+	{
+		name: '🗾 Japanese lessons',
+		url: 'https://docs.google.com/document/d/1cUH79OrAi-CyDxz10hnON_RCEotkUD1x9dFqaiuOIQ4/edit?usp=sharing',
+		description: 'Japanese learning resources'
+	},
+	{
+		name: '👨‍🏫 Preply',
+		url: 'https://preply.com/',
+		description: 'Language tutoring platform'
 	}
 ]; 
