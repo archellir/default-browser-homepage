@@ -5,6 +5,7 @@
 	let canvas: HTMLCanvasElement;
 	const lineCount = 3;
 	let phase = 0;
+	let hue = 0;
 
 	$effect(() => {
 		if (visible && canvas) {
@@ -13,25 +14,26 @@
 			canvas.height = window.innerHeight;
 
 			const centerY = canvas.height / 2;
-			const amplitude = 160;
-			const frequency = 0.02;
+			const amplitude = Math.min(window.innerWidth, window.innerHeight) * 0.2;
+			const frequency = window.innerWidth < 768 ? 0.03 : 0.02;
 
 			const animate = () => {
-				ctx.fillStyle = 'rgb(40, 40, 40)';
+				ctx.fillStyle = 'rgba(40, 40, 40, 0.2)';
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-				ctx.strokeStyle = 'rgb(235, 219, 178)';
-				ctx.lineWidth = 2.5;
-
 				for (let i = 0; i < lineCount; i++) {
+					ctx.strokeStyle = 'rgb(235, 219, 178)';
+					ctx.lineWidth = window.innerWidth < 768 ? 2.5 : 2.5;
+
 					ctx.beginPath();
 					ctx.moveTo(0, centerY);
 
 					for (let x = 0; x < canvas.width; x++) {
-						const distanceFromCenter = (x - canvas.width / 2) / (canvas.width / 6);
+						const distanceFromCenter = (x - canvas.width / 2) / (canvas.width / 4);
 						const bellCurve = Math.exp(-distanceFromCenter * distanceFromCenter);
 
-						const verticalOffset = (i - (lineCount - 1) / 2) * 18 * bellCurve;
+						const verticalOffset =
+							(i - (lineCount - 1) / 2) * (window.innerWidth < 768 ? 18 : 18) * bellCurve;
 
 						const y =
 							centerY +
@@ -46,6 +48,7 @@
 				}
 
 				phase += 0.05;
+				hue = (hue + 0.5) % 360;
 			};
 
 			const interval = setInterval(animate, 30);
