@@ -53,14 +53,16 @@
 	});
 </script>
 
-<div class="absolute right-8 top-8 rounded-lg bg-black/30 px-6 py-4 backdrop-blur-md">
+<div
+	class="absolute right-8 top-8 hidden rounded-lg bg-black/30 px-6 py-4 backdrop-blur-md lg:block"
+>
 	{#if loading}
 		<div class="flex w-48 flex-col gap-3">
 			<div class="h-8 w-full overflow-hidden rounded-lg bg-white/10">
 				<div
 					class="h-full bg-white/20 transition-all duration-300"
 					style:width="{loadingProgress}%"
-				/>
+				></div>
 			</div>
 			<div class="text-xs opacity-70">Loading weather data...</div>
 		</div>

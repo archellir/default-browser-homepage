@@ -75,7 +75,9 @@
 	});
 </script>
 
-<div class="absolute left-8 top-8 rounded-lg bg-black/30 px-6 py-4 backdrop-blur-md">
+<div
+	class="absolute left-8 top-8 hidden rounded-lg bg-black/30 px-6 py-4 backdrop-blur-md lg:block"
+>
 	<div class="flex flex-col gap-4">
 		{#each cities as { city, country, timezone }}
 			<div class="flex flex-col">

@@ -37,7 +37,12 @@ export async function updateBackground(): Promise<{
   finalUrl: string;
   imageInfo: ImageInfo | null;
 }> {
-  const newUrl = `https://picsum.photos/3024/1964?random=${Date.now()}`;
+  const isMobile = window.innerWidth <= 640;
+  // iPhone 15 Pro resolution in portrait mode (with some extra for parallax/movement)
+  const width = isMobile ? 1179 : 3024;
+  const height = isMobile ? 2556 : 1964;
+  
+  const newUrl = `https://picsum.photos/${width}/${height}?random=${Date.now()}`;
   const finalUrl = await loadImage(newUrl);
   const imageInfo = await getImageInfo(finalUrl);
   

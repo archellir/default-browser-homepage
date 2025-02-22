@@ -38,6 +38,7 @@
 		refreshBackground();
 		const timeInterval = setInterval(() => (time = new Date()), 1000);
 		const bgInterval = setInterval(refreshBackground, 300000);
+
 		return () => {
 			clearInterval(timeInterval);
 			clearInterval(bgInterval);
@@ -47,7 +48,7 @@
 
 <LoadingSpinner visible={isLoading} />
 <main
-	class="relative grid h-screen grid-rows-[auto_auto_1fr] gap-16 p-16 font-['IBM_Plex_Mono'] transition-all duration-500"
+	class="relative grid min-h-screen grid-rows-[auto_auto_1fr] gap-12 p-4 font-['IBM_Plex_Mono'] transition-all duration-500 sm:gap-16 sm:p-16 lg:h-screen"
 	class:text-white={$isDarkText}
 	class:text-black={!$isDarkText}
 	style:background-image={backgroundUrl ? `url(${backgroundUrl})` : 'none'}
@@ -57,26 +58,23 @@
 	<TimeWidget />
 	<WeatherWidget />
 
-	<div class="flex flex-col items-center justify-start">
+	<div class="hidden flex-col items-center justify-start sm:flex">
 		<div class="mb-8 text-6xl font-light drop-shadow-lg">
 			{time.toLocaleTimeString('en-GB', { hour12: false })}
 		</div>
 		<SearchBar />
 	</div>
 
-	<div class="grid grid-cols-2 gap-24">
+	<div class="grid grid-cols-1 gap-6 self-end md:grid-cols-2 md:gap-24">
 		<LinkSection title={SectionType.PERSONAL} links={personalLinks} />
 		<LinkSection title={SectionType.TOOLS} links={toolLinks} />
-	</div>
-
-	<div class="grid grid-cols-2 gap-24 self-end">
 		<LinkSection title={SectionType.LEARNING} links={learningLinks} />
 		<LinkSection title={SectionType.FUN} links={funLinks} />
 		<LinkSection title={SectionType.BUSINESS} links={businessLinks} />
 		<LinkSection title={SectionType.CLOUD} links={cloudLinks} />
 	</div>
 
-	<div class="fixed bottom-8 right-8 flex items-center gap-4">
+	<div class="fixed bottom-4 right-4 flex items-center gap-4 md:bottom-8 md:right-8">
 		{#if imageInfo}
 			<a
 				href={imageInfo.url}
