@@ -65,7 +65,7 @@
 		<SearchBar />
 	</div>
 
-	<div class="grid grid-cols-1 gap-6 self-end md:grid-cols-2 md:gap-20">
+	<div class="grid grid-cols-1 gap-6 self-end md:grid-cols-2">
 		<LinkSection title={SectionType.PERSONAL} links={personalLinks} />
 		<LinkSection title={SectionType.TOOLS} links={toolLinks} />
 		<LinkSection title={SectionType.LEARNING} links={learningLinks} />
