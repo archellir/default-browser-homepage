@@ -192,6 +192,21 @@ export const learningLinks: Link[] = [
 		description: 'Coding challenges & practice'
 	},
 	{
+		name: '⌨️ Typing Study',
+		url: 'https://www.typingstudy.com/',
+		description: 'Touch typing lessons & practice'
+	},
+	{
+		name: '⌨️ KeyBr',
+		url: 'https://www.keybr.com/',
+		description: 'Typing practice & improvement'
+	},
+	{
+		name: '⌨️ Monkey Type',
+		url: 'https://monkeytype.com/',
+		description: 'Customizable typing test platform'
+	},
+	{
 		name: '🗾 Japanese lessons',
 		url: 'https://docs.google.com/document/d/1cUH79OrAi-CyDxz10hnON_RCEotkUD1x9dFqaiuOIQ4/edit?usp=sharing',
 		description: 'Japanese learning resources'
