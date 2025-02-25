@@ -13,41 +13,66 @@
 			canvas.width = window.innerWidth;
 			canvas.height = window.innerHeight;
 
+			const isMobile = window.innerWidth < 768;
+			const centerX = canvas.width / 2;
 			const centerY = canvas.height / 2;
-			const amplitude = Math.min(window.innerWidth, window.innerHeight) * 0.2;
-			const frequency = window.innerWidth < 768 ? 0.03 : 0.02;
+			const amplitude = Math.min(window.innerWidth, window.innerHeight) * 0.35;
+			const frequency = isMobile ? 0.015 : 0.01;
 
 			const animate = () => {
-				ctx.fillStyle = 'rgba(40, 40, 40, 0.2)';
+				ctx.fillStyle = 'rgba(40, 40, 40, 1)';
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 				for (let i = 0; i < lineCount; i++) {
-					ctx.strokeStyle = 'rgb(235, 219, 178)';
-					ctx.lineWidth = window.innerWidth < 768 ? 2.5 : 2.5;
+					ctx.strokeStyle = 'rgba(235, 219, 178, 0.1)';
+					ctx.lineWidth = isMobile ? 3 : 3.5;
 
 					ctx.beginPath();
-					ctx.moveTo(0, centerY);
 
-					for (let x = 0; x < canvas.width; x++) {
-						const distanceFromCenter = (x - canvas.width / 2) / (canvas.width / 4);
-						const bellCurve = Math.exp(-distanceFromCenter * distanceFromCenter);
+					if (isMobile) {
+						// Vertical animation for mobile
+						ctx.moveTo(centerX, 0);
 
-						const verticalOffset =
-							(i - (lineCount - 1) / 2) * (window.innerWidth < 768 ? 18 : 18) * bellCurve;
+						for (let y = 0; y < canvas.height; y++) {
+							const distanceFromCenter = (y - canvas.height / 2) / (canvas.height / 4);
+							const bellCurve = Math.exp(-distanceFromCenter * distanceFromCenter);
 
-						const y =
-							centerY +
-							verticalOffset +
-							Math.sin(x * frequency + phase + i * 2) * amplitude * bellCurve;
+							const horizontalOffset = (i - (lineCount - 1) / 2) * 30 * bellCurve;
 
-						ctx.lineTo(x, y);
+							const x =
+								centerX +
+								horizontalOffset +
+								Math.sin(y * frequency + phase + i * 2) * amplitude * bellCurve;
+
+							ctx.lineTo(x, y);
+						}
+
+						ctx.lineTo(centerX, canvas.height);
+					} else {
+						// Horizontal animation for desktop (original)
+						ctx.moveTo(0, centerY);
+
+						for (let x = 0; x < canvas.width; x++) {
+							const distanceFromCenter = (x - canvas.width / 2) / (canvas.width / 4);
+							const bellCurve = Math.exp(-distanceFromCenter * distanceFromCenter);
+
+							const verticalOffset = (i - (lineCount - 1) / 2) * 30 * bellCurve;
+
+							const y =
+								centerY +
+								verticalOffset +
+								Math.sin(x * frequency + phase + i * 2) * amplitude * bellCurve;
+
+							ctx.lineTo(x, y);
+						}
+
+						ctx.lineTo(canvas.width, centerY);
 					}
 
-					ctx.lineTo(canvas.width, centerY);
 					ctx.stroke();
 				}
 
-				phase += 0.05;
+				phase += 0.03;
 				hue = (hue + 0.5) % 360;
 			};
 
