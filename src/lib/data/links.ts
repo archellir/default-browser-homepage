@@ -215,5 +215,10 @@ export const learningLinks: Link[] = [
 		name: '👨‍🏫 Preply',
 		url: 'https://preply.com/',
 		description: 'Language tutoring platform'
+	},
+	{
+		name: '🦢 Gray Swan AI',
+		url: 'https://www.grayswan.ai/',
+		description: 'AI safety and security solutions'
 	}
-]; 
+];
